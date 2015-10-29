@@ -1,0 +1,3 @@
+ocr-servlet/target
+ocr-servlet/.*
+ocr-servlet/*.log

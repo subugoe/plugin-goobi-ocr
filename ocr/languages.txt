@@ -1,0 +1,6 @@
+defaults:de,en,fr
+en:en
+eng:en
+english:en
+de:de
+ger:de

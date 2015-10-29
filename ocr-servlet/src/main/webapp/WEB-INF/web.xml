@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
+	<servlet>
+		<servlet-name>OcrServlet</servlet-name>
+		<servlet-class>de.unigoettingen.sub.goobi.OcrServlet</servlet-class>
+		<init-param>
+			<param-name>pageExtractorScript</param-name>
+			<param-value>/opt/digiverso/goobi/scripts/ocr/page_extractor_for_metadataeditor.sh</param-value>
+		</init-param>
+		<init-param>
+			<param-name>pathToMetadata</param-name>
+			<param-value>/opt/digiverso/goobi/metadata</param-value>
+		</init-param>
+
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>OcrServlet</servlet-name>
+		<url-pattern>/*</url-pattern>
+	</servlet-mapping>
+</web-app>
