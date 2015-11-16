@@ -1,6 +1,175 @@
 defaults:de,en,fr
+
+# Arabic?
+ara:ar
+#Arabic?
+arc:ar
+
+# Chech
+cs:cs
+cze:cs
+
+# Danish
+da:da
+
+# German
+de:de
+Deutsch:de
+dger:de
+ger:de
+ge:de
+gem:de
+
+# Dutch?
+dut:nl
+
+# Greek?
+el:el
+
+# English
 en:en
 eng:en
 english:en
-de:de
-ger:de
+
+# Spanish
+es:es
+
+# Persian?
+fa:fa
+
+# French
+fr:fr
+Fr.:fr
+fre:fr
+
+# Frisian
+fy:fy
+
+# Irish
+ga:ga
+
+# ?
+ges:
+gez:
+gmh:
+grc:
+
+# Greek?
+gre:el
+
+# Hebrew
+he:he
+heb:he
+
+# Croatian
+hrv:hr
+
+# Hungarian
+hu:hu
+hun:hu
+
+# Indonesian?
+ind:id
+
+# Italian
+it:it
+ita:it
+
+# Yiddish?
+ji:yi
+
+# ?
+kal:
+
+# Latin
+la:la
+
+# Latin? Latvian?
+lat:la
+
+# Lithuanian
+lit:lt
+
+# Mongolian?
+mon:mn
+
+# ?
+mul:
+
+# Dutch?
+nds:ln
+nl:nl
+
+# Norwegian?
+no:no
+non:no
+
+# ?
+ota:
+
+# ?
+pli:
+
+# Polish
+pol:pl
+
+# Portugese
+pt:pt
+
+# ?
+qhe:
+
+# Romanian
+ro:ro
+
+# ?
+roh:
+
+# Russian
+ru:ru
+rus:ru
+
+# Samoan?
+sa:sm
+sam:sm
+
+# Sanskrit?
+san:sa
+
+# Slovenian? Slovak?
+sl:sl
+slo:sl
+
+# Spanish
+spa:es
+spanish:es
+
+
+# Albanian?
+sq:sq
+
+# ?
+srp:
+
+# Swedish?
+sv:sv
+
+# Syrian? not supported?
+# syr:
+
+# Telugu?
+tel:te
+
+# Turkish
+tr:tr
+tur:tr
+
+# ?
+wen:
+
+# Yiddish
+yid:yi
+
+# Chinese
+zh:zh
+
