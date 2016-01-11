@@ -30,6 +30,9 @@ origPath=$2
 # e.g. .../metadata/60000/images/airyon_PPN1234_tif
 tifPath=$3
 
+# e.g. Antiqua, Fraktur
+textTypeInGoobi=$4
+
 logFolder="$goobiPath/../logs/ocr"
 if [ ! -d $logFolder ]; then
 	mkdir $logFolder
@@ -69,35 +72,12 @@ echo "Using languages for OCR: $langsForOcr" 2>&1 | tee -a $logFile
 #------------------------------------------------------------------------------
 
 ###############################################################################
-# Find out the text type in the database
+# Determine the text type 
 #
-# All database connection data are in goobi.xml in Tomcat's path
-# 'gothic' is only set if 'Fraktur' is found in DB
+# 'gothic' is only set if 'Fraktur' is passed from Goobi 
 # Otherwise it is always 'normal'
 ###############################################################################
-tomcatPath=`ps aux | grep tomcat | grep -P -o 'Dcatalina.home=\S+' | cut -d '=' -f 2`
-
-goobiXml=`cat $tomcatPath/conf/Catalina/localhost/goobi.xml`
-
-# Remove all XML comments
-goobiXml=${goobiXml//<!--*-->}
-
-dbUser=`echo $goobiXml | grep -P -o 'username=\S+' | cut -d '"' -f 2`
-dbPassword=`echo $goobiXml | grep -P -o 'password=\S+' | cut -d '"' -f 2`
-dbName=`echo $goobiXml | grep -P -o 'jdbc:mysql://\S+' | cut -d '/' -f 4 | cut -d '?' -f 1`
-dbHost=`echo $goobiXml | grep -P -o 'jdbc:mysql://\S+' | cut -d '/' -f 3 | cut -d ':' -f 1`
-dbPort=`echo $goobiXml | grep -P -o 'jdbc:mysql://\S+' | cut -d '/' -f 3 | cut -d ':' -f 2`
-
-if [ "$dbPort" = "$dbHost" ]; then
-	# If there is no port defined in the file
-	dbPort="3306"
-fi
-
-# e.g. 60000 in .../metadata/60000/images
-goobiProcessId=`echo $imagePath | cut -d '/' -f 6`
-
-textTypeInGoobi=`mysql -u$dbUser -p$dbPassword -h$dbHost -P$dbPort -D$dbName --skip-column-names -e "select eig.Wert from werkstueckeeigenschaften eig, werkstuecke w where eig.Titel='Schrifttyp' and eig.werkstueckeID=w.WerkstueckeID and w.ProzesseID=$goobiProcessId;"`
-echo "Found text type: $textTypeInGoobi"
+echo "Found text type: $textTypeInGoobi" 2>&1 | tee -a $logFile
 
 if [ "$textTypeInGoobi" = "Fraktur" ]; then
 	textTypeForOcr="gothic"
