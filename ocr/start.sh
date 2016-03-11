@@ -12,7 +12,7 @@
 
 # This is called when there is an error
 function mailAndQuit {
-	email=`head -1 mail_for_error_report.txt | cut -f 1`
+	email=`head -1 /opt/digiverso/goobi/scripts/ocr/mail_for_error_report.txt | cut -f 1`
 	logFileToSend=$1
 	echo "mailing $logFileToSend to $email"
 	mail -s "Goobi: Error in OCR" $email < $logFileToSend
@@ -125,14 +125,17 @@ if [ "$colorPath" != "" ]; then
 	cp $colorPath/* ${tifPath}_mixed
 fi
 
-colorDepth=`tiffinfo $origPath/00000001.tif | grep -P -o 'Bits/Sample: \S+' | cut -d ' ' -f 2`
+colorDepth=`tiffinfo $origPath/00000001.tif 2> /dev/null | grep -P -o 'Bits/Sample: \S+' | cut -d ' ' -f 2`
+colorKind=`tiffinfo $origPath/00000001.tif 2> /dev/null | grep -P -o 'Photometric Interpretation: \S+' | cut -d ' ' -f3`
+
+echo found depth:  $colorDepth
 
 inputPathForOcr=$tifPath
 
 if [ "$mixedColorImages" = true ]; then
 	echo "Found mixed colored images" 2>&1 | tee -a $logFile
 	inputPathForOcr=${tifPath}_mixed
-elif [ "$colorDepth" = "24" ]; then
+elif [ "$colorKind" = "RGB" ]; then
 	echo "Found colored images only" 2>&1 | tee -a $logFile
 	inputPathForOcr=$origPath
 elif [ "$colorDepth" = "1" ]; then
